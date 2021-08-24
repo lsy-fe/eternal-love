@@ -14,12 +14,35 @@
         </div>
       </div>
       <div class="heart"><div class="text">I&emsp;❤️&emsp;U</div></div>
-      <div class="custom-btn"><i class="flash-across"></i>Eternal love</div>
+      <div class="custom-btn" @click="handleClick">
+        <i class="flash-across"></i>Eternal love
+      </div>
     </div>
-    <div v-if="show" class="bruce flex-ct-x main" data-title="状态悬浮球">
+    <div
+      v-if="show && !canShow"
+      class="flex-ct-x main"
+      data-title="状态悬浮球"
+    >
       <div class="state-ball warning">
         <div class="wave"></div>
       </div>
+    </div>
+    <div v-if="show && canShow === 1">
+        <div class="treasure"></div>
+        <div class="answer old">
+        恭喜我的宝贝，已经到了最后一步啦！请联系小笨蛋换取打开宝藏的钥匙~
+        </div>
+    </div>
+    <div>
+      <a
+        v-if="show && canShow === 2"
+        class="answer"
+        href="https://lsy-fe.github.io/eternal-love/dist/index.html#/"
+        target="_blank"
+      >
+        恭喜我的宝贝，终于成功解开谜题啦！！！
+        点击这里，宝藏就在后面喔！！！
+      </a>
     </div>
     <div class="bruce" data-title="气泡背景墙">
       <ul class="bubble-bgwall">
@@ -41,12 +64,18 @@
 <script lang="ts">
 import {
   defineComponent,
-  computed
+  computed,
+  reactive,
+  toRefs
 } from '@vue/composition-api'
 
 export default defineComponent({
   setup () {
-    const show = computed(() => {
+    const state = reactive({
+      show: false
+    })
+
+    const canShow = computed(() => {
       return getFiles()
     })
 
@@ -58,7 +87,9 @@ export default defineComponent({
       files.forEach(item => {
         const filename = item.split('/')[2]
         list.push(filename.split('-')[0])
+        console.log(item, filename)
       })
+      console.log(list)
       return hasEveryday(list)
     }
 
@@ -75,19 +106,27 @@ export default defineComponent({
         '--second-top-height',
         -70 - ((num * 36) / 32) * 10 + 'px'
       )
-      if (num === 31 && list.some(item => item === 'love')) {
+      if (num === 31 && list.some(item => item === 'LSY&RCC')) {
         document.documentElement.style.setProperty('--top-height', '-420px')
         document.documentElement.style.setProperty(
           '--second-top-height',
           '-430px'
         )
-        return true
+        return 2
+      } else if (num === 31) {
+        return 1
       }
-      return false
+      return 0
+    }
+
+    const handleClick = () => {
+      state.show = true
     }
 
     return {
-      show
+      ...toRefs(state),
+      canShow,
+      handleClick
     }
   }
 })
@@ -139,7 +178,9 @@ body
   width 320px
   height 320px
   background-color #fff
-  margin 50% auto
+  margin auto
+  margin-top calc( 50% - 160px )
+  margin-bottom calc( 50% - 160px )
   &::before, &::after
     position absolute
     left 50%
@@ -172,7 +213,7 @@ body
     border-radius 100%
     width 100%
     height 100%
-    background-image linear-gradient(-180deg, #af8 13%, #3c9 91%)
+    background #af8
 @keyframes rotate
   to
     transform rotate(1turn)
@@ -192,6 +233,11 @@ body
   background linear-gradient(0deg, rgba(251, 33, 117, 1) 0%, rgba(234, 76, 137, 1) 100%)
   overflow hidden
   border-radius 100px
+  width 200px
+  height 50px
+  line-height 50px
+  font-size 25px
+  font-weight bold
   &::before
     position absolute
     content ''
@@ -324,7 +370,7 @@ body
     height 100%
     transform rotateX(-15deg) rotateY(15deg)
     transform-style preserve-3d
-    animation rotate 5s infinite linear
+    animation rotate-cube 5s infinite linear
   li
     display flex
     position absolute
@@ -353,7 +399,7 @@ body
     &.right
       background url('~@/assets/28-3-21-2.jpg') center center / cover no-repeat
       transform rotateY(90deg) translateZ(calc((var(--bruce-width) / 2)))
-@keyframes rotate
+@keyframes rotate-cube
   from
     transform rotateY(0) rotateX(0)
   to
@@ -385,4 +431,23 @@ body
   100%
     transform rotate(360deg)
     opacity 0.8
+.answer
+    position absolute
+    z-index 999999
+    color #00bfff
+    font-size 50px
+    font-weight bold
+    top calc( 50% - 68px )
+    width 100%
+    display block
+    &.old
+      color #ff4500
+.treasure
+    background url('~@/assets/treasure-box.png') center center/cover no-repeat
+    width 240px
+    height 240px
+    position relative
+    z-index 666
+    margin 0 auto
+    margin-top calc( 50% - 300px)
 </style>
