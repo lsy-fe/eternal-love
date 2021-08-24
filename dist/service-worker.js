@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.23f8987d4cf9940d3fbb1dc716f75e3f.js"
+  "/precache-manifest.488c04191915a43d4f19e01681e97c5f.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "eternal-love"});

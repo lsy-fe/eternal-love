@@ -1,7 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7ee15049675aeb32ff30",
-    "url": "/css/app.1e6c9625.css"
+    "revision": "17e30b23895b8ad18db1819d7be281b7",
+    "url": "/1.ico"
+  },
+  {
+    "revision": "7c4af619b0efac4e7bfc",
+    "url": "/css/app.853fa4cc.css"
   },
   {
     "revision": "198c38ae97806c346a25867211d237d0",
@@ -352,12 +356,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/img/treasure-box.dbdbdde9.png"
   },
   {
-    "revision": "dfa193d1f22075f8575cb493f40dff69",
+    "revision": "b0648af9e03cc8aa583b0bb53a28cb08",
     "url": "/index.html"
   },
   {
-    "revision": "7ee15049675aeb32ff30",
-    "url": "/js/app.75b3527b.js"
+    "revision": "7c4af619b0efac4e7bfc",
+    "url": "/js/app.e29a9664.js"
   },
   {
     "revision": "6819a98661b4d2ab1117",

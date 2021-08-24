@@ -450,4 +450,8 @@ body
     z-index 666
     margin 0 auto
     margin-top calc( 50% - 300px)
+.flex-ct-x
+    position absolute
+    left calc(50% - 168px)
+    top calc(50% - 176px)
 </style>
